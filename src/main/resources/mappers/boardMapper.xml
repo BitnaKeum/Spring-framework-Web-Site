@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org/DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.kwce.mapper.BoardMapper">
+
+	<insert id="create">
+	INSERT INTO tbl_board(title,content,writer,addr) VALUES(#{title},#{content},#{writer},#{addr});
+	</insert>
+	
+	<select id="read" resultType="com.kwce.domain.BoardVO">
+	SELECT bno,title,content,writer,regdate,viewcnt,addr,likecnt,hatecnt FROM tbl_board WHERE bno = #{bno};
+	</select>
+	
+	<update id="update">
+	UPDATE tbl_board SET title = #{title}, content = #{content} WHERE bno = #{bno};
+	</update>
+	
+	<update id="increaseViewCnt">
+		UPDATE tbl_board
+		SET viewcnt = viewcnt+1
+		WHERE bno = #{bno}
+	</update>
+	
+	<delete id="delete">
+	DELETE FROM tbl_board WHERE bno = #{bno};
+	</delete>
+	
+	<delete id="deleteall">
+	DELETE * FROM tbl_board;
+	</delete>
+	
+	<select id="listAll" resultType="com.kwce.domain.BoardVO">
+	<![CDATA[
+	SELECT bno,title,content,writer,regdate,viewcnt,addr,likecnt,hatecnt 
+	FROM tbl_board 
+	WHERE bno>0
+	ORDER BY bno DESC, regdate DESC
+	]]>
+	</select>
+	
+	<select id="listPaging" resultType="com.kwce.domain.BoardVO">
+	<![CDATA[
+	SELECT bno,title,content,writer,regdate,viewcnt,addr,likecnt,hatecnt
+	FROM tbl_board 
+	WHERE bno>0
+	ORDER BY bno DESC, regdate DESC
+	LIMIT 0, 5
+	]]>
+	</select>
+	
+	<select id="listCriteria" resultType="com.kwce.domain.BoardVO">
+	<![CDATA[
+	SELECT bno,title,content,writer,regdate,viewcnt,addr,likecnt,hatecnt
+	FROM tbl_board 
+	WHERE bno>0
+	ORDER BY bno DESC, regdate DESC
+	LIMIT #{pageStart}, #{perPageNum}
+	]]>
+	</select>
+	
+	<select id="countBoard" resultType="int">
+	<![CDATA[
+	SELECT COUNT(bno)
+	FROM tbl_board 
+	WHERE bno>0
+	]]>
+	</select>
+	
+	  <update id="updatelike">
+    UPDATE tbl_board
+       SET likecnt = likecnt + 1
+    WHERE bno = #{bno}
+    </update>
+    
+    <update id="updatehate">
+    UPDATE tbl_board
+       SET hatecnt = hatecnt + 1
+    WHERE bno = #{bno}
+    </update>
+	
+	<select id="list_SEOUL" resultType="com.kwce.domain.BoardVO">
+	<![CDATA[
+	SELECT bno,title,content,writer,regdate,viewcnt,addr,likecnt,hatecnt FROM tbl_board WHERE addr='서울'
+	ORDER BY bno DESC, regdate DESC;
+	]]>
+	</select>
+	
+	<select id="list_GYEONGGI" resultType="com.kwce.domain.BoardVO">
+	<![CDATA[
+	SELECT bno,title,content,writer,regdate,viewcnt,addr,likecnt,hatecnt FROM tbl_board WHERE addr='경기'
+	ORDER BY bno DESC, regdate DESC;
+	]]>
+	</select>
+	
+	<select id="list_INCHEON" resultType="com.kwce.domain.BoardVO">
+	<![CDATA[
+	SELECT bno,title,content,writer,regdate,viewcnt,addr,likecnt,hatecnt FROM tbl_board WHERE addr='인천'
+	ORDER BY bno DESC, regdate DESC;
+	]]>
+	</select>
+	
+	<select id="list_DAEJEON" resultType="com.kwce.domain.BoardVO">
+	<![CDATA[
+	SELECT bno,title,content,writer,regdate,viewcnt,addr,likecnt,hatecnt FROM tbl_board WHERE addr='대전'
+	ORDER BY bno DESC, regdate DESC;
+	]]>
+	</select>
+	
+	<select id="list_CHUNGCHEONG" resultType="com.kwce.domain.BoardVO">
+	<![CDATA[
+	SELECT bno,title,content,writer,regdate,viewcnt,addr,likecnt,hatecnt FROM tbl_board WHERE addr='충청'
+	ORDER BY bno DESC, regdate DESC;
+	]]>
+	</select>
+	
+	<select id="list_KANGWON" resultType="com.kwce.domain.BoardVO">
+	<![CDATA[
+	SELECT bno,title,content,writer,regdate,viewcnt,addr,likecnt,hatecnt FROM tbl_board WHERE addr='강원'
+	ORDER BY bno DESC, regdate DESC;
+	]]>
+	</select>
+	
+	<select id="list_DAEGU" resultType="com.kwce.domain.BoardVO">
+	<![CDATA[
+	SELECT bno,title,content,writer,regdate,viewcnt,addr,likecnt,hatecnt FROM tbl_board WHERE addr='대구'
+	ORDER BY bno DESC, regdate DESC;
+	]]>
+	</select>
+	
+	<select id="list_JEOLLA" resultType="com.kwce.domain.BoardVO">
+	<![CDATA[
+	SELECT bno,title,content,writer,regdate,viewcnt,addr,likecnt,hatecnt FROM tbl_board WHERE addr='전라'
+	ORDER BY bno DESC, regdate DESC;
+	]]>
+	</select>
+	
+	<select id="list_BUSAN" resultType="com.kwce.domain.BoardVO">
+	<![CDATA[
+	SELECT bno,title,content,writer,regdate,viewcnt,addr,likecnt,hatecnt FROM tbl_board WHERE addr='부산'
+	ORDER BY bno DESC, regdate DESC;
+	]]>
+	</select>
+	
+	<select id="list_GYEONGSANG" resultType="com.kwce.domain.BoardVO">
+	<![CDATA[
+	SELECT bno,title,content,writer,regdate,viewcnt,addr,likecnt,hatecnt FROM tbl_board WHERE addr='경상'
+	ORDER BY bno DESC, regdate DESC;
+	]]>
+	</select>
+	
+	<select id="list_JEJU" resultType="com.kwce.domain.BoardVO">
+	<![CDATA[
+	SELECT bno,title,content,writer,regdate,viewcnt,addr,likecnt,hatecnt FROM tbl_board WHERE addr='제주'
+	ORDER BY bno DESC, regdate DESC;
+	]]>
+	</select>
+	
+</mapper>
